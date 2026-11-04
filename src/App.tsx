@@ -3,20 +3,7 @@ import FormularioAgendamento from './components/FormularioAgendamento'
 import ListaAgendamentos from './components/ListaAgendamentos'
 import dadosIniciais from './data/agendamentos.json'
 import type { Agendamento } from './types/agendamento'
-
-/** Data de hoje no formato aaaa-mm-dd, no fuso do aparelho. */
-function hojeIso(): string {
-  const agora = new Date()
-  const mes = String(agora.getMonth() + 1).padStart(2, '0')
-  const dia = String(agora.getDate()).padStart(2, '0')
-  return `${agora.getFullYear()}-${mes}-${dia}`
-}
-
-/** Converte aaaa-mm-dd para dd/mm/aaaa. */
-function formatarData(dataIso: string): string {
-  const [ano, mes, dia] = dataIso.split('-')
-  return `${dia}/${mes}/${ano}`
-}
+import { formatarData, hojeIso } from './utils/datas'
 
 function App() {
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>(dadosIniciais)

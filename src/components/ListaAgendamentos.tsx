@@ -1,4 +1,5 @@
 import type { Agendamento } from '../types/agendamento'
+import BotaoEmailConfirmacao from './BotaoEmailConfirmacao'
 
 interface ListaAgendamentosProps {
   agendamentos: Agendamento[]
@@ -13,7 +14,8 @@ function ListaAgendamentos({ agendamentos }: ListaAgendamentosProps) {
     <ul>
       {agendamentos.map((agendamento) => (
         <li key={agendamento.id}>
-          {agendamento.hora} — {agendamento.cliente} ({agendamento.servico})
+          {agendamento.hora} — {agendamento.cliente} ({agendamento.servico}){' '}
+          <BotaoEmailConfirmacao agendamento={agendamento} />
         </li>
       ))}
     </ul>

@@ -9,14 +9,16 @@ interface FormularioAgendamentoProps {
 
 function FormularioAgendamento({ dataInicial, onAdicionar }: FormularioAgendamentoProps) {
   const [cliente, setCliente] = useState('')
+  const [email, setEmail] = useState('')
   const [servico, setServico] = useState('')
   const [data, setData] = useState(dataInicial)
   const [hora, setHora] = useState('')
 
   function handleSubmit(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault()
-    onAdicionar({ cliente, servico, data, hora })
+    onAdicionar({ cliente, email, servico, data, hora })
     setCliente('')
+    setEmail('')
     setServico('')
     setHora('')
   }
@@ -26,6 +28,11 @@ function FormularioAgendamento({ dataInicial, onAdicionar }: FormularioAgendamen
       <p>
         <label>
           Cliente <input value={cliente} onChange={(e) => setCliente(e.target.value)} required />
+        </label>
+      </p>
+      <p>
+        <label>
+          E-mail <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </label>
       </p>
       <p>
