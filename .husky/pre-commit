@@ -1,0 +1,20 @@
+# Sensor de commit (Husky v9) — roda antes de TODO "git commit".
+# Se qualquer etapa falhar (código de saída diferente de 0), o commit é cancelado.
+#
+# "npm run check" executa, nesta ordem:
+#   1. npm run lint       → oxlint (erros de código / sintaxe)
+#   2. npm run typecheck  → tsc --noEmit nos tsconfig.app.json e tsconfig.node.json
+#   3. npm test           → vitest run
+#
+# Por que "typecheck" e não só "tsc --noEmit"?
+#   O tsconfig.json da raiz tem "files": [] e só aponta para os outros dois
+#   (project references). Rodar "tsc --noEmit" nele não verifica NENHUM
+#   arquivo e sai com código 0 — o sensor ficava cego. Testado: com a linha
+#   quebrada "teste:" em src/types/agendamento.ts, "tsc --noEmit" passava.
+#
+# Atenção: o hook roda sobre os arquivos da pasta (working tree), não só sobre
+# o que está no "git add". Arquivos não commitados também contam.
+#
+# Como o hook é ativado: o script "prepare": "husky" do package.json roda em
+# todo "npm install" e configura git core.hooksPath = .husky/_
+npm run check
